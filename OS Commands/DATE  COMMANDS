@@ -1,1 +1,51 @@
+/* "+m"= used to display month*/
+	Syntax:date +"%m"
+	Output:01
+
+  /* "%h"= used to display month name */
+	Syntax:date +"%h"
+	Output:Jan
+
+/* "%d"= used to display day of the month */
+	Syntax: date +"%d"
+	output:02
+
+/* "%y"= used to display last 2 digits */
+	Syntax:date +"%y"
+	output:25
+
+/* "%Y"=used to display total year */
+	Syntax:$ date +"%Y"
+	output:2025
+
+/* "%H"= to display hours */
+	Syntax:$ date +"%H"
+	output:14
+
+/* "%M"= to display minutes */
+	Syntax:$ date +"%M"
+	Output:43
+
+/* "%S"=used to display seconds */
+	Syntax:$ date +"%S"
+	output:13
+
+/* "cal"=used to display calendar*/
+	Syntax:$ cal 
+	output:    January 2025      
+Su Mo Tu We Th Fr Sa  
+          1  2  3  4  
+ 5  6  7  8  9 10 11  
+12 13 14 15 16 17 18  
+19 20 21 22 23 24 25  
+26 27 28 29 30 31     
+
+$ cal 1 2006
+    January 2006      
+Su Mo Tu We Th Fr Sa  
+ 1  2  3  4  5  6  7  
+ 8  9 10 11 12 13 14  
+15 16 17 18 19 20 21  
+22 23 24 25 26 27 28  
+29 30 31       
 
