@@ -13,11 +13,12 @@ int main(){
 		printf("The parent process id is %d\n",pid1);
 	}else{//child process
 		pid2=getpid();
-		printf("The child process id is %d\n",pid1);
+		printf("The child process id is %d\n",pid2);
 	}
 	return 0;
 }
 
 //output
-The parent process id is 13941
-The child process id is 25851
+The parent process id is 14629
+The child process id is 14630
+
