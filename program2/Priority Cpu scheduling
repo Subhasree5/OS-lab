@@ -1,0 +1,79 @@
+#include <stdio.h>
+
+int main() {
+    int p[20], bt[20], pri[20], wt[20], tat[20], i, j, n, temp;
+    float wtavg = 0, tatavg = 0;
+
+    printf("Enter the number of processes: ");
+    scanf("%d", &n);
+
+    for (i = 0; i < n; i++) {
+        p[i] = i; // Assign process IDs
+        printf("Enter the Burst Time & Priority of Process %d: ", i);
+        scanf("%d %d", &bt[i], &pri[i]);
+    }
+
+    // Sorting processes by priority (Ascending Order: Lower priority value = Higher priority)
+    for (i = 0; i < n - 1; i++) {
+        for (j = i + 1; j < n; j++) {
+            if (pri[i] > pri[j]) { // Higher priority means smaller number
+                // Swap priority
+                temp = pri[i];
+                pri[i] = pri[j];
+                pri[j] = temp;
+
+                // Swap burst time
+                temp = bt[i];
+                bt[i] = bt[j];
+                bt[j] = temp;
+
+                // Swap process ID
+                temp = p[i];
+                p[i] = p[j];
+                p[j] = temp;
+            }
+        }
+    }
+
+    // Calculate Waiting Time (WT) and Turnaround Time (TAT)
+    wt[0] = 0; // First process has no waiting time
+    tat[0] = bt[0]; // Turnaround time for first process
+
+    for (i = 1; i < n; i++) {
+        wt[i] = wt[i - 1] + bt[i - 1];
+        tat[i] = wt[i] + bt[i];
+        wtavg += wt[i];
+        tatavg += tat[i];
+    }
+
+    // Display Process Table
+    printf("\nPROCESS\tPRIORITY\tBURST TIME\tWAITING TIME\tTURNAROUND TIME\n");
+    for (i = 0; i < n; i++) {
+        printf("%d\t%d\t\t%d\t\t%d\t\t%d\n", p[i], pri[i], bt[i], wt[i], tat[i]);
+    }
+
+    // Display Averages
+    printf("\nAverage Waiting Time: %.2f", wtavg / n);
+    printf("\nAverage Turnaround Time: %.2f\n", tatavg / n);
+
+    return 0;
+}
+
+//input
+Enter the number of processes: 5
+Enter the Burst Time & Priority of Process 0: 10 3
+Enter the Burst Time & Priority of Process 1: 1 1
+Enter the Burst Time & Priority of Process 2: 2 4
+Enter the Burst Time & Priority of Process 3: 1 5
+Enter the Burst Time & Priority of Process 4: 5 2
+
+//output
+PROCESS	PRIORITY	BURST TIME	WAITING TIME	TURNAROUND TIME
+1	1		1		0		1
+4	2		5		1		6
+0	3		10		6		16
+2	4		2		16		18
+3	5		1		18		19
+
+Average Waiting Time: 8.20
+Average Turnaround Time: 11.80
