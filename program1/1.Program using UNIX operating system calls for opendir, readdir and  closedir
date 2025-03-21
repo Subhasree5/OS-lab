@@ -23,9 +23,10 @@ int main(){
 	return 0;
 }
 
-//output
+//input
 Enter directory name: /home/vitcse/os
 Contents in the directory /home/vitcse/os
+//output
 sss
 ..
 file1.text
