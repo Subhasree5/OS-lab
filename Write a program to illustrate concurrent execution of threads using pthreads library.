@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+
+// Thread function 1
+void *mythread1(void *vargp) {
+    int i;
+    printf("Thread 1\n");
+    for (i = 1; i <= 10; i++)
+        printf("i = %d\n", i);
+    printf("Exit from Thread 1\n");
+    return NULL;
+}
+
+// Thread function 2
+void *mythread2(void *vargp) {
+    int j;
+    printf("Thread 2\n");
+    for (j = 1; j <= 10; j++)
+        printf("j = %d\n", j);
+    printf("Exit from Thread 2\n");
+    return NULL;
+}
+
+int main() {
+    pthread_t tid1, tid2; // Separate thread variables
+
+    printf("Before creating threads\n");
+
+    // Creating two threads
+    pthread_create(&tid1, NULL, mythread1, NULL);
+    pthread_create(&tid2, NULL, mythread2, NULL);
+
+    // Waiting for both threads to complete
+    pthread_join(tid1, NULL);
+    pthread_join(tid2, NULL);
+
+    printf("All threads finished execution\n");
+    return 0;
+}
+
+//input
+. /a.out
+
+//output
+Before creating threads
+Thread 1
+i = 1
+i = 2
+i = 3
+i = 4
+i = 5
+i = 6
+i = 7
+i = 8
+i = 9
+i = 10
+Exit from Thread 1
+Thread 2
+j = 1
+j = 2
+j = 3
+j = 4
+j = 5
+j = 6
+j = 7
+j = 8
+j = 9
+j = 10
+Exit from Thread 2
+All threads finished execution
