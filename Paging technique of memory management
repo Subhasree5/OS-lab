@@ -1,0 +1,83 @@
+#include <stdio.h>
+
+int main() {
+    int ms, ps, nop, np, rempages, i, j, x, y, pa, offset;
+    int s[10], fno[10][20];
+
+    // Input memory and page size
+    printf("\nEnter the memory size: ");
+    scanf("%d", &ms);
+    printf("\nEnter the page size: ");
+    scanf("%d", &ps);
+
+    // Calculate number of pages available
+    nop = ms / ps;
+    printf("\nThe number of pages available in memory: %d", nop);
+
+    // Input number of processes
+    printf("\nEnter the number of processes: ");
+    scanf("%d", &np);
+
+    rempages = nop; // Remaining pages
+
+    for (i = 0; i < np; i++) {
+        printf("\nEnter the number of pages required for Process[%d]: ", i + 1);
+        scanf("%d", &s[i]);
+
+        if (s[i] > rempages) {
+            printf("\nMemory is Full! Cannot allocate pages for Process[%d]", i + 1);
+            break;
+        }
+
+        rempages -= s[i];
+
+        // Input page table
+        printf("\nEnter page table for Process[%d]: ", i + 1);
+        for (j = 0; j < s[i]; j++) {
+            scanf("%d", &fno[i][j]);
+        }
+    }
+
+    // Logical to Physical Address Translation
+    printf("\nEnter Logical Address to find Physical Address:");
+    printf("\nEnter Process No., Page Number, and Offset: ");
+    scanf("%d %d %d", &x, &y, &offset);
+
+    // Validity check
+    if (x > np || y >= s[x - 1] || offset >= ps) {
+        printf("\nInvalid Process Number, Page Number, or Offset.");
+    } else {
+        pa = fno[x - 1][y] * ps + offset;
+        printf("\nThe Physical Address is: %d", pa);
+    }
+
+    return 0;
+}
+
+//input
+
+Enter the memory size: 1000
+
+Enter the page size: 100
+//output
+The number of pages available in memory: 10
+
+//input
+Enter the number of processes: 3
+
+Enter the number of pages required for Process[1]: 4
+
+Enter page table for Process[1]: 8 6 9 5
+
+Enter the number of pages required for Process[2]: 5
+
+Enter page table for Process[2]: 1 4 5 7 3
+
+Enter the number of pages required for Process[3]: 3
+//output
+Memory is Full! Cannot allocate pages for Process[3]
+//input
+Enter Logical Address to find Physical Address:
+Enter Process No., Page Number, and Offset: 2 3 60
+//output
+The Physical Address is: 760
